@@ -7,7 +7,10 @@ app.use(express.urlencoded({extended:false}))
 
 const port = 3000
 const upload = multer()
+const db = require('./db')
 const routerApi = require('./network/routes')
+
+db()
 
 app.use(express.json()) // Middleware
 routerApi(app)

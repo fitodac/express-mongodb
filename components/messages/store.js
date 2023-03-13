@@ -1,5 +1,4 @@
 const Model = require('./model')
-require('dotenv').config()
 
 
 const addMessage = message => {
