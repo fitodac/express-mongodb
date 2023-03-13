@@ -1,7 +1,7 @@
 const store = require('./store')
 
-const getMessages = () => {
-	return new Promise((resolve, reject) => resolve(store.list()))
+const getMessages = filterUser => {
+	return new Promise((resolve, reject) => resolve(store.list(filterUser)))
 }
 
 

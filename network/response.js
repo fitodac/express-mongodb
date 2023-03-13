@@ -1,4 +1,6 @@
 let success = (req, res, message, status, details) => {
+	if( details ) console.log(details)
+
 	res.status(status || 200).json({
 		error: '',
 		body: message
