@@ -1,8 +1,13 @@
 const store = require('./store')
 
+const getMessages = () => {
+	return new Promise((resolve, reject) => resolve(store.list()))
+}
+
+
 const addMessage = (user, message) => {
 
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 
 		if( !user || !message ){
 			reject()
@@ -15,19 +20,29 @@ const addMessage = (user, message) => {
 			date: new Date()
 		}
 
-		store.add(fullMessage)
+		await store.add(fullMessage)
 
 		resolve(fullMessage)
 	})
 }
 
 
-const getMessages = () => {
-	return new Promise((resolve, reject) => resolve(store.list()))
+const updateMessage = (id, message) => {
+	return new Promise(async (resolve, reject) => {
+		
+		if( !id || !message ){
+			reject()
+			return false
+		}
+		
+		const res = await store.update(id, message)
+		resolve(res)
+	})
 }
 
 
 module.exports = {
+	getMessages,
 	addMessage,
-	getMessages
+	updateMessage
 }

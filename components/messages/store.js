@@ -18,7 +18,20 @@ const addMessage = message => {
 const getMessages = async () => await Model.find()
 
 
+const updateMessage = async (id, message) => {
+	const msj = await Model.findById({
+		_id: id
+	})
+
+	msj.message = message
+
+	const newMsj = await msj.save()
+	return newMsj
+}
+
+
 module.exports = {
 	add: addMessage,
-	list: getMessages
+	list: getMessages,
+	update: updateMessage
 }
