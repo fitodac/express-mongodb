@@ -5,10 +5,10 @@ const addMessage = (user, message) => {
 	return new Promise((resolve, reject) => {
 
 		if( !user || !message ){
-			reject('Los datos son incorrectos')
+			reject()
 			return false
 		}
-		
+
 		const fullMessage = {
 			user,
 			message,
