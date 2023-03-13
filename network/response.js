@@ -5,10 +5,13 @@ let success = (req, res, message, status, details) => {
 	})
 }
 let error = (req, res, message, status, details) => {
+	console.log(details)
+
 	res.status(status || 500).json({
 		error: message,
 		body: ''   
 	})
+
 }
 
 

@@ -1,8 +1,8 @@
 const express = require('express')
-const message = require('../components/messages/network')
+const message_routes = require('../components/messages/routes')
 
 function routerApi(app){
-	app.use('/message', message)
+	app.use('/message', message_routes)
 }
 
 
