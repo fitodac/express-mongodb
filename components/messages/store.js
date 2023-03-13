@@ -1,13 +1,5 @@
-const db = require('mongoose')
 const Model = require('./model')
 require('dotenv').config()
-
-db.Promise = global.Promise
-db.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_NAME}.pgzd4ro.mongodb.net/?retryWrites=true&w=majority`, {
-	useNewUrlParser: true,
-})
-
-console.log('[db] conectada con éxito')
 
 
 const addMessage = message => {
@@ -34,8 +26,14 @@ const updateMessage = async (id, message) => {
 }
 
 
+const removeMessage = async id => {
+	await Model.deleteOne({ _id: id })
+}
+
+
 module.exports = {
 	add: addMessage,
 	list: getMessages,
-	update: updateMessage
+	update: updateMessage,
+	remove: removeMessage
 }
