@@ -7,9 +7,16 @@ const addMessage = message => {
 }
 
 const getMessages = async filterUser => {
-	let filter = filterUser ? { user: filterUser } : {}
-	const messages = await Model.find(filter)
-	return messages
+	try {
+		let filter = filterUser ? { user: filterUser } : {}
+		const resp = await Model.find(filter)
+												.populate('user')
+												.exec()
+		return resp
+
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 
