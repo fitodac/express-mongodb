@@ -1,6 +1,9 @@
 const express = require('express')
+const multer = require('multer')
+
 const router = express.Router()
 const response = require('../../network/response')
+
 const { 
 	addMessage,
 	getMessages,
@@ -8,6 +11,9 @@ const {
 	deleteMessage
 } = require('./controller')
 
+const upload = multer({
+    dest: 'public/files/'
+})
 
 // GET
 router.get('/', (req, res) => {
@@ -19,8 +25,8 @@ router.get('/', (req, res) => {
 
 
 // POST
-router.post('/', (req, res) => {
-	addMessage(req.body.user, req.body.message)
+router.post('/', upload.single('file'), (req, res) => {
+	addMessage(req.body.chat, req.body.user, req.body.message, req.file)
 		.then( fullMessage => response.success(req, res, fullMessage, 201))
 		.catch(err => response.error(req, res, 'Información inválida', 400, err))
 })

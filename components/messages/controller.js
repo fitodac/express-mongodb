@@ -5,23 +5,33 @@ const getMessages = filterUser => {
 }
 
 
-const addMessage = (user, message) => new Promise(async (resolve, reject) => {
+const addMessage = (chat, user, message, file) => 
+	new Promise(async (resolve, reject) => {
 
-	if( !user || !message ){
-		reject()
-		return false
+		if( !chat || !user || !message ){
+			console.error('[messageController] No hay chat usuario o mensaje');
+			reject('Los datos son incorrectos');
+			return false
+		}
+
+		let fileUrl = ''
+		if (file) {
+			fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+		}
+
+		const fullMessage = {
+			chat,
+			user,
+			message,
+			date: new Date(),
+			file: fileUrl
+		}
+
+		store.add(fullMessage)
+
+		resolve(fullMessage)
 	}
-
-	const fullMessage = {
-		user,
-		message,
-		date: new Date()
-	}
-
-	await store.add(fullMessage)
-
-	resolve(fullMessage)
-})
+)
 
 
 

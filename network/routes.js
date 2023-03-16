@@ -1,10 +1,12 @@
 const express = require('express')
-const message_routes = require('../components/messages/routes')
-const user_routes = require('../components/user/routes')
+const messages = require('../components/messages/routes')
+const users = require('../components/user/routes')
+const chat = require('../components/chat/routes')
 
 function routerApi(app){
-	app.use('/message', message_routes)
-	app.use('/user', user_routes)
+	app.use('/message', messages)
+	app.use('/user', users)
+	app.use('/chat', chat)
 }
 
 
